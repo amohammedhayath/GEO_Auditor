@@ -1,0 +1,146 @@
+{
+  "timestamp": "2026-08-05T16:20:00.000Z",
+  "url": "https://cal.com",
+  "domain": "cal.com",
+  "meta": {
+    "title": "Cal.com | Open Scheduling Infrastructure",
+    "description": "Cal.com is the open-source Calendly alternative. Embed scheduling into your application with full control.",
+    "canonical": "https://cal.com"
+  },
+  "overallScore": 76,
+  "scoreFormula": {
+    "formula": "Score = (Crawlability * 0.25) + (Extractability * 0.30) + (Entity Schema * 0.20) + (Live AI Probe * 0.25)",
+    "breakdown": [
+      { "label": "AI Bot Crawlability & AI-Readiness", "score": 70, "weight": "25%" },
+      { "label": "Fact & Extractability Density (Princeton GEO)", "score": 80, "weight": "30%" },
+      { "label": "Entity Grounding & Schema", "score": 65, "weight": "20%" },
+      { "label": "Live AI Citation Probe", "score": 90, "weight": "25%" }
+    ]
+  },
+  "checks": {
+    "check1_crawlability": {
+      "name": "AI Bot Crawlability & AI-Readiness",
+      "score": 70,
+      "maxScore": 100,
+      "metrics": {
+        "botsAllowed": "5/5",
+        "blockedBots": [],
+        "llmsTxtPresent": false
+      },
+      "findings": [
+        {
+          "type": "issue",
+          "title": "Missing /llms.txt Standard Documentation File",
+          "description": "Cal.com lacks an /llms.txt file on its root server, missing a major direct LLM ingestion format.",
+          "evidence": "HTTP 404 on https://cal.com/llms.txt",
+          "fixNeeded": "Deploy an /llms.txt file describing Cal.com APIs and core scheduling workflows."
+        }
+      ]
+    },
+    "check2_factExtractability": {
+      "name": "Fact & Extractability Density (Princeton GEO)",
+      "score": 80,
+      "maxScore": 100,
+      "metrics": {
+        "statsCount": 15,
+        "statsPer500Words": 3.1,
+        "questionHeadingsCount": 5,
+        "quoteCount": 3,
+        "sampleStats": ["100%", "40,000+", "150+"]
+      },
+      "findings": [
+        {
+          "type": "pass",
+          "title": "Meets Princeton Stat Density Benchmark",
+          "description": "Cal.com contains 3.1 stats per 500 words, satisfying the Princeton GEO recommendation threshold.",
+          "evidence": "Found 15 numerical statistics across 2,400 words."
+        }
+      ]
+    },
+    "check3_entitySchema": {
+      "name": "Entity Grounding & Schema",
+      "score": 65,
+      "maxScore": 100,
+      "metrics": {
+        "schemasFound": ["WebSite"],
+        "hasOrgSchema": false,
+        "hasProductSchema": false,
+        "hasFaqSchema": false,
+        "sameAsCount": 2,
+        "sameAsLinks": ["https://github.com/calcom", "https://twitter.com/calcom"]
+      },
+      "findings": [
+        {
+          "type": "issue",
+          "title": "Missing Organization & SoftwareApplication JSON-LD Schemas",
+          "description": "Cal.com lacks explicit JSON-LD Organization and SoftwareApplication schemas on its homepage.",
+          "evidence": "Found JSON-LD: [WebSite]. Missing: Organization, SoftwareApplication.",
+          "fixNeeded": "Add structured JSON-LD schema defining Cal.com as an open-source scheduling infrastructure."
+        }
+      ]
+    },
+    "check4_liveAIProbe": {
+      "name": "Live AI Citation Probe",
+      "score": 90,
+      "maxScore": 100,
+      "liveProbeExecuted": true,
+      "metrics": {
+        "isCited": true,
+        "position": "Top 3",
+        "sentiment": "Positive",
+        "reasoning": "Cal.com is heavily cited as the primary open-source alternative to Calendly.",
+        "competitorCitations": ["calendly.com", "acuityscheduling.com"]
+      },
+      "findings": [
+        {
+          "type": "pass",
+          "title": "High Citation Rate for Open-Source Scheduling",
+          "description": "Cal.com is cited frequently in AI answers asking for open-source scheduling.",
+          "evidence": "Position: Top 3. Sentiment: Positive."
+        }
+      ]
+    }
+  },
+  "copyPasteAssets": {
+    "llmsTxt": "# Cal.com\n> Cal.com is the open-source scheduling infrastructure for modern software products.\n",
+    "jsonLd": "<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"SoftwareApplication\",\n  \"name\": \"Cal.com\",\n  \"applicationCategory\": \"SchedulingApplication\"\n}\n</script>",
+    "heroBlock": "<div class=\"ai-summary-block\"><h2>What is Cal.com?</h2><p>Cal.com is open-source scheduling software built for enterprise infrastructure and developer integrations.</p></div>"
+  },
+  "prioritizedFixes": [
+    {
+      "priority": 1,
+      "impact": "HIGH",
+      "effort": "LOW",
+      "impactScore": 9.0,
+      "effortScore": 2,
+      "rankScore": 4.5,
+      "title": "Deploy /llms.txt File",
+      "jargonExplained": "An /llms.txt file gives AI search engines a direct Markdown reference to understand your product and APIs.",
+      "problem": "Missing /llms.txt file.",
+      "proofPage": "https://cal.com/llms.txt",
+      "copyPasteType": "llmsTxt",
+      "instruction": "Upload an /llms.txt file to server root."
+    },
+    {
+      "priority": 2,
+      "impact": "HIGH",
+      "effort": "LOW",
+      "impactScore": 8.5,
+      "effortScore": 2,
+      "rankScore": 4.25,
+      "title": "Add Organization & SoftwareApplication JSON-LD Schemas",
+      "jargonExplained": "JSON-LD schema gives AI models machine-readable data about your company and features.",
+      "problem": "Missing JSON-LD Organization & SoftwareApplication schemas.",
+      "proofPage": "https://cal.com",
+      "copyPasteType": "jsonLd",
+      "instruction": "Embed JSON-LD script block into website head."
+    }
+  ],
+  "crawlSummary": {
+    "wordCount": 2400,
+    "statsCount": 15,
+    "robotsTxtFound": true,
+    "llmsTxtFound": false,
+    "schemasFound": ["WebSite"]
+  }
+}

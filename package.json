@@ -1,0 +1,28 @@
+{
+  "name": "geo-auditor",
+  "version": "1.0.0",
+  "description": "Generative Engine Optimization (GEO) Audit Engine & Dashboard",
+  "main": "server/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite client",
+    "server": "node server/index.js",
+    "build": "vite build client",
+    "start": "node server/index.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "axios": "^1.7.9",
+    "cheerio": "^1.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "lucide-react": "^0.474.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "vite": "^6.0.11"
+  }
+}

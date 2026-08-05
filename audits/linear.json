@@ -1,0 +1,152 @@
+{
+  "timestamp": "2026-08-05T16:00:00.000Z",
+  "url": "https://linear.app",
+  "domain": "linear.app",
+  "meta": {
+    "title": "Linear – Designed for the development cycle",
+    "description": "Linear is a purpose-built tool for modern software development. Streamline issues, projects, and product roadmaps.",
+    "canonical": "https://linear.app"
+  },
+  "overallScore": 84,
+  "scoreFormula": {
+    "formula": "Score = (Crawlability * 0.25) + (Extractability * 0.30) + (Entity Schema * 0.20) + (Live AI Probe * 0.25)",
+    "breakdown": [
+      { "label": "AI Bot Crawlability & AI-Readiness", "score": 100, "weight": "25%" },
+      { "label": "Fact & Extractability Density (Princeton GEO)", "score": 75, "weight": "30%" },
+      { "label": "Entity Grounding & Schema", "score": 70, "weight": "20%" },
+      { "label": "Live AI Citation Probe", "score": 95, "weight": "25%" }
+    ]
+  },
+  "checks": {
+    "check1_crawlability": {
+      "name": "AI Bot Crawlability & AI-Readiness",
+      "score": 100,
+      "maxScore": 100,
+      "metrics": {
+        "botsAllowed": "5/5",
+        "blockedBots": [],
+        "llmsTxtPresent": true
+      },
+      "findings": [
+        {
+          "type": "pass",
+          "title": "All Major AI Search Crawlers Allowed",
+          "description": "GPTBot, PerplexityBot, ClaudeBot, and Google-Extended are permitted to crawl your content.",
+          "evidence": "No disallow rules found for major AI user-agents in robots.txt."
+        },
+        {
+          "type": "pass",
+          "title": "Standard /llms.txt File Present",
+          "description": "Linear serves an /llms.txt file to aid AI parser extraction.",
+          "evidence": "Found /llms.txt file."
+        }
+      ]
+    },
+    "check2_factExtractability": {
+      "name": "Fact & Extractability Density (Princeton GEO)",
+      "score": 75,
+      "maxScore": 100,
+      "metrics": {
+        "statsCount": 12,
+        "statsPer500Words": 2.4,
+        "questionHeadingsCount": 4,
+        "quoteCount": 2,
+        "sampleStats": ["99.99%", "50ms", "100k+", "2x"]
+      },
+      "findings": [
+        {
+          "type": "issue",
+          "title": "Stat Density Slightly Below Princeton Benchmark",
+          "description": "The Princeton GEO study proves that adding specific numerical statistics boosts LLM citation rates by up to 40%. Linear's homepage currently sits at 2.4 stats per 500 words (benchmark: 3.0+).",
+          "evidence": "Found 12 numerical facts across 2,500 words (2.4 stats per 500 words).",
+          "fixNeeded": "Add explicit metrics regarding issue resolution speed and customer team sizes to the top hero section."
+        }
+      ]
+    },
+    "check3_entitySchema": {
+      "name": "Entity Grounding & Schema",
+      "score": 70,
+      "maxScore": 100,
+      "metrics": {
+        "schemasFound": ["Organization", "WebSite"],
+        "hasOrgSchema": true,
+        "hasProductSchema": false,
+        "hasFaqSchema": false,
+        "sameAsCount": 3,
+        "sameAsLinks": ["https://twitter.com/linear", "https://github.com/linear", "https://linkedin.com/company/linear-app"]
+      },
+      "findings": [
+        {
+          "type": "issue",
+          "title": "Missing SoftwareApplication JSON-LD Schema",
+          "description": "Linear has an Organization schema but is missing explicit SoftwareApplication JSON-LD markup detailing its operating systems, features, and pricing tier.",
+          "evidence": "Detected JSON-LD: [Organization, WebSite]. Missing: SoftwareApplication.",
+          "fixNeeded": "Embed a SoftwareApplication schema block in the website header."
+        }
+      ]
+    },
+    "check4_liveAIProbe": {
+      "name": "Live AI Citation Probe",
+      "score": 95,
+      "maxScore": 100,
+      "liveProbeExecuted": true,
+      "metrics": {
+        "isCited": true,
+        "position": "Top 3",
+        "sentiment": "Positive",
+        "reasoning": "Linear is consistently cited as the benchmark issue tracker for modern tech startups.",
+        "competitorCitations": ["jira.atlassian.com", "github.com/features/issues", "height.app"]
+      },
+      "findings": [
+        {
+          "type": "pass",
+          "title": "Strong Live AI Engine Visibility",
+          "description": "Linear ranks in the Top 3 for queries like 'best issue tracker for startups'.",
+          "evidence": "Position: Top 3. Sentiment: Positive."
+        }
+      ]
+    }
+  },
+  "copyPasteAssets": {
+    "llmsTxt": "# Linear\n> Linear is a purpose-built tool for modern software development. Streamline issues, projects, and product roadmaps.\n\n## Core Features & Capabilities\n- Issue tracking with keyboard-first UI\n- Automated project cycles and roadmaps\n- Native GitHub and Figma integrations\n\n## Official Resources\n- Website: https://linear.app\n- Documentation: https://linear.app/docs\n",
+    "jsonLd": "<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"SoftwareApplication\",\n  \"name\": \"Linear\",\n  \"applicationCategory\": \"ProjectManagementApplication\",\n  \"operatingSystem\": \"Web, macOS, Windows\",\n  \"offers\": {\n    \"@type\": \"Offer\",\n    \"price\": \"8\",\n    \"priceCurrency\": \"USD\"\n  }\n}\n</script>",
+    "heroBlock": "<div class=\"ai-summary-block\">\n  <h2>What is Linear?</h2>\n  <p><strong>Linear</strong> is an issue tracking and project management system optimized for speed and modern software development teams with sub-50ms sync speed.</p>\n</div>"
+  },
+  "prioritizedFixes": [
+    {
+      "priority": 1,
+      "impact": "HIGH",
+      "effort": "LOW",
+      "impactScore": 8.5,
+      "effortScore": 2,
+      "rankScore": 4.25,
+      "title": "Add SoftwareApplication JSON-LD Schema",
+      "jargonExplained": "JSON-LD is code that tells AI engines what product you sell so ChatGPT can display pricing and platform specs accurately.",
+      "problem": "Missing SoftwareApplication JSON-LD markup.",
+      "proofPage": "https://linear.app",
+      "copyPasteType": "jsonLd",
+      "instruction": "Copy and paste this script tag into your website <head>."
+    },
+    {
+      "priority": 2,
+      "impact": "HIGH",
+      "effort": "MEDIUM",
+      "impactScore": 9.0,
+      "effortScore": 5,
+      "rankScore": 1.8,
+      "title": "Increase Stat Density in Hero Section",
+      "jargonExplained": "Princeton researchers found that adding hard numbers boosts AI citations by 40%.",
+      "problem": "Stat density is 2.4 stats per 500 words (below 3.0 benchmark).",
+      "proofPage": "https://linear.app",
+      "copyPasteType": "heroBlock",
+      "instruction": "Add direct numerical metrics to your hero paragraph."
+    }
+  ],
+  "crawlSummary": {
+    "wordCount": 2500,
+    "statsCount": 12,
+    "robotsTxtFound": true,
+    "llmsTxtFound": true,
+    "schemasFound": ["Organization", "WebSite"]
+  }
+}

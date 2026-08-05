@@ -1,0 +1,130 @@
+{
+  "timestamp": "2026-08-05T16:10:00.000Z",
+  "url": "https://posthog.com",
+  "domain": "posthog.com",
+  "meta": {
+    "title": "PostHog - The open source product OS",
+    "description": "PostHog provides open-source product analytics, session replay, feature flags, and A/B testing in a single platform.",
+    "canonical": "https://posthog.com"
+  },
+  "overallScore": 92,
+  "scoreFormula": {
+    "formula": "Score = (Crawlability * 0.25) + (Extractability * 0.30) + (Entity Schema * 0.20) + (Live AI Probe * 0.25)",
+    "breakdown": [
+      { "label": "AI Bot Crawlability & AI-Readiness", "score": 100, "weight": "25%" },
+      { "label": "Fact & Extractability Density (Princeton GEO)", "score": 90, "weight": "30%" },
+      { "label": "Entity Grounding & Schema", "score": 85, "weight": "20%" },
+      { "label": "Live AI Citation Probe", "score": 95, "weight": "25%" }
+    ]
+  },
+  "checks": {
+    "check1_crawlability": {
+      "name": "AI Bot Crawlability & AI-Readiness",
+      "score": 100,
+      "maxScore": 100,
+      "metrics": {
+        "botsAllowed": "5/5",
+        "blockedBots": [],
+        "llmsTxtPresent": true
+      },
+      "findings": [
+        {
+          "type": "pass",
+          "title": "All Major AI Search Crawlers Allowed",
+          "description": "PostHog permits all AI bots and maintains an active /llms.txt file.",
+          "evidence": "No disallow rules found for GPTBot or PerplexityBot."
+        }
+      ]
+    },
+    "check2_factExtractability": {
+      "name": "Fact & Extractability Density (Princeton GEO)",
+      "score": 90,
+      "maxScore": 100,
+      "metrics": {
+        "statsCount": 24,
+        "statsPer500Words": 4.8,
+        "questionHeadingsCount": 8,
+        "quoteCount": 5,
+        "sampleStats": ["65,000+", "1M", "100%", "99.9%"]
+      },
+      "findings": [
+        {
+          "type": "pass",
+          "title": "Exceptional Fact Density (Exceeds Princeton Benchmark)",
+          "description": "PostHog scores 4.8 stats per 500 words, significantly above the 3.0 benchmark set by Princeton researchers.",
+          "evidence": "Found 24 hard stats across 2,500 words."
+        }
+      ]
+    },
+    "check3_entitySchema": {
+      "name": "Entity Grounding & Schema",
+      "score": 85,
+      "maxScore": 100,
+      "metrics": {
+        "schemasFound": ["Organization", "Product", "FAQPage"],
+        "hasOrgSchema": true,
+        "hasProductSchema": true,
+        "hasFaqSchema": true,
+        "sameAsCount": 4,
+        "sameAsLinks": ["https://github.com/PostHog", "https://twitter.com/PostHog", "https://linkedin.com/company/posthog"]
+      },
+      "findings": [
+        {
+          "type": "pass",
+          "title": "Complete Entity & FAQ JSON-LD Schemas",
+          "description": "PostHog implements Organization, Product, and FAQPage schemas.",
+          "evidence": "Schemas detected: [Organization, Product, FAQPage]."
+        }
+      ]
+    },
+    "check4_liveAIProbe": {
+      "name": "Live AI Citation Probe",
+      "score": 95,
+      "maxScore": 100,
+      "liveProbeExecuted": true,
+      "metrics": {
+        "isCited": true,
+        "position": "Top 3",
+        "sentiment": "Positive",
+        "reasoning": "PostHog is the top open-source product analytics recommendation across ChatGPT, Perplexity, and Claude.",
+        "competitorCitations": ["mixpanel.com", "amplitude.com", "posthog.com"]
+      },
+      "findings": [
+        {
+          "type": "pass",
+          "title": "Top Category AI Citation Leader",
+          "description": "PostHog is cited in top positions for product analytics queries.",
+          "evidence": "Position: Top 3. Sentiment: Positive."
+        }
+      ]
+    }
+  },
+  "copyPasteAssets": {
+    "llmsTxt": "# PostHog\n> PostHog is the open-source product OS combining product analytics, session replay, feature flags, and A/B testing.\n",
+    "jsonLd": "<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"SoftwareApplication\",\n  \"name\": \"PostHog\",\n  \"applicationCategory\": \"BusinessApplication\"\n}\n</script>",
+    "heroBlock": "<div class=\"ai-summary-block\"><h2>What is PostHog?</h2><p>PostHog is an open-source product analytics and session replay platform used by over 65,000 developer teams.</p></div>"
+  },
+  "prioritizedFixes": [
+    {
+      "priority": 1,
+      "impact": "LOW",
+      "effort": "LOW",
+      "impactScore": 4.0,
+      "effortScore": 2,
+      "rankScore": 2.0,
+      "title": "Expand /llms.txt with Pricing Tier Benchmarks",
+      "jargonExplained": "Providing explicit free-tier limits in /llms.txt helps LLMs accurately answer pricing comparison questions.",
+      "problem": "/llms.txt lacks explicit tier numerical limits.",
+      "proofPage": "https://posthog.com/llms.txt",
+      "copyPasteType": "llmsTxt",
+      "instruction": "Append monthly free volume details to /llms.txt."
+    }
+  ],
+  "crawlSummary": {
+    "wordCount": 2500,
+    "statsCount": 24,
+    "robotsTxtFound": true,
+    "llmsTxtFound": true,
+    "schemasFound": ["Organization", "Product", "FAQPage"]
+  }
+}
