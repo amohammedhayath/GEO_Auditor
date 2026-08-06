@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Search, ShieldCheck, Cpu, Database, Award, CheckCircle2, AlertTriangle, 
-  XCircle, Copy, Check, ArrowRight, ExternalLink, RefreshCw, Info, HelpCircle, FileText
+  XCircle, Copy, Check, ArrowRight, ExternalLink, RefreshCw, Info, HelpCircle, FileText, X
 } from 'lucide-react';
 
 export default function App() {
@@ -13,6 +13,15 @@ export default function App() {
   const [copiedKey, setCopiedKey] = useState(null);
   const [activeFixModal, setActiveFixModal] = useState(null);
   const [showFormula, setShowFormula] = useState(false);
+
+  // Close modal on Escape key press
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setActiveFixModal(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   // Load pre-generated sample audits on mount
   useEffect(() => {
@@ -422,11 +431,26 @@ export default function App() {
 
       {/* Copy-Paste Asset Modal */}
       {activeFixModal && (
-        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(6px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem', zIndex: 100 }}>
-          <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: '16px', maxWidth: '650px', width: '100%', padding: '1.75rem' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-              <h3 style={{ color: '#fff', fontSize: '1.1rem', margin: 0 }}>Copy-Paste Fix: {activeFixModal.title}</h3>
-              <button onClick={() => setActiveFixModal(null)} style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: '1.25rem' }}>✕</button>
+        <div 
+          onClick={() => setActiveFixModal(null)}
+          style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem', zIndex: 100, cursor: 'pointer' }}
+        >
+          <div 
+            onClick={(e) => e.stopPropagation()}
+            style={{ background: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: '16px', maxWidth: '680px', width: '100%', padding: '1.75rem', cursor: 'default', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.5)' }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', borderBottom: '1px solid var(--border-color)', paddingBottom: '0.75rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <FileText size={20} style={{ color: 'var(--accent-cyan)' }} />
+                <h3 style={{ color: '#fff', fontSize: '1.1rem', margin: 0 }}>Copy-Paste Fix: {activeFixModal.title}</h3>
+              </div>
+              <button 
+                onClick={() => setActiveFixModal(null)} 
+                title="Close modal (Esc)"
+                style={{ background: '#1F293D', border: '1px solid var(--border-color)', color: '#fff', cursor: 'pointer', borderRadius: '50%', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.2s' }}
+              >
+                <X size={18} />
+              </button>
             </div>
             
             <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
@@ -434,17 +458,17 @@ export default function App() {
             </p>
 
             <div style={{ position: 'relative', marginBottom: '1.25rem' }}>
-              <pre>{activeFixModal.copyPasteContent}</pre>
+              <pre style={{ maxHeight: '300px', overflowY: 'auto' }}>{activeFixModal.copyPasteContent}</pre>
               <button
                 onClick={() => handleCopy(activeFixModal.copyPasteContent, 'modal')}
                 style={{
                   position: 'absolute',
-                  top: '0.5rem',
-                  right: '0.5rem',
-                  background: 'var(--accent-indigo)',
+                  top: '0.75rem',
+                  right: '0.75rem',
+                  background: copiedKey === 'modal' ? 'var(--accent-emerald)' : 'var(--accent-indigo)',
                   color: '#fff',
                   border: 'none',
-                  padding: '0.4rem 0.75rem',
+                  padding: '0.45rem 0.85rem',
                   borderRadius: '6px',
                   fontSize: '0.75rem',
                   fontWeight: 600,
@@ -452,15 +476,23 @@ export default function App() {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.35rem',
+                  boxShadow: '0 2px 4px rgba(0,0,0,0.3)',
+                  transition: 'background 0.2s ease',
                 }}
               >
                 {copiedKey === 'modal' ? <Check size={14} /> : <Copy size={14} />}
-                {copiedKey === 'modal' ? 'Copied!' : 'Copy Code'}
+                {copiedKey === 'modal' ? 'Copied to Clipboard!' : 'Copy Code'}
               </button>
             </div>
 
-            <div style={{ textAlign: 'right' }}>
-              <button onClick={() => setActiveFixModal(null)} style={{ background: '#1F293D', color: '#fff', border: 'none', padding: '0.5rem 1.25rem', borderRadius: '8px', cursor: 'pointer' }}>Close</button>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Press Esc or click outside to close</span>
+              <button 
+                onClick={() => setActiveFixModal(null)} 
+                style={{ background: 'linear-gradient(135deg, #374151, #1F2937)', color: '#fff', border: '1px solid var(--border-color)', padding: '0.5rem 1.5rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 600, fontSize: '0.85rem' }}
+              >
+                Close Window
+              </button>
             </div>
           </div>
         </div>
@@ -468,7 +500,7 @@ export default function App() {
 
       {/* Footer */}
       <footer style={{ borderTop: '1px solid var(--border-color)', padding: '1.5rem', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.8rem' }}>
-        GEO Auditor — Phaze AI Product Developer Take-Home Task • Grounded in Princeton KDD 2024 GEO Research
+        GEO Auditor • Grounded in Princeton KDD 2024 GEO Research
       </footer>
     </div>
   );
