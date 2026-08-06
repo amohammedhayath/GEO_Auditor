@@ -317,7 +317,7 @@ async function analyzeCheck4_LiveAIProbe(crawlData, check1, check2, check3) {
       "competitorCitations": ["comp1.com", "comp2.com", "comp3.com"]
     }`;
 
-    const modelsToTry = ['gemini-1.5-flash', 'gemini-2.0-flash', 'gemini-1.5-pro'];
+    const modelsToTry = ['gemini-2.0-flash', 'gemini-1.5-flash-latest', 'gemini-2.5-flash', 'gemini-2.0-flash-lite'];
     const ai = new GoogleGenerativeAI(apiKey.trim());
 
     for (const modelName of modelsToTry) {
@@ -337,7 +337,12 @@ async function analyzeCheck4_LiveAIProbe(crawlData, check1, check2, check3) {
         competitorCitations = parsed.competitorCitations || [];
         console.log(`[Gemini Live Probe Success] Model ${modelName} returned live citation response!`);
       } catch (err) {
-        console.error(`[Gemini API Error with ${modelName}]`, err.message);
+        if (err.message.includes('429')) {
+          console.error(`[Gemini API Rate Limit (429)] Your API key reached Google's free tier rate limit. Falling back smoothly.`);
+          break;
+        } else {
+          console.error(`[Gemini API Error with ${modelName}]`, err.message);
+        }
       }
     }
   } else {
