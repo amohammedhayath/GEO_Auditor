@@ -104,6 +104,22 @@ app.get('/api/sample-audits', (req, res) => {
   }
 });
 
+// Serve static client build files in production (Render / Railway / Heroku)
+const clientDistPath = path.join(__dirname, '../client/dist');
+const rootDistPath = path.join(__dirname, '../dist');
+
+if (fs.existsSync(clientDistPath)) {
+  app.use(express.static(clientDistPath));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(clientDistPath, 'index.html'));
+  });
+} else if (fs.existsSync(rootDistPath)) {
+  app.use(express.static(rootDistPath));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(rootDistPath, 'index.html'));
+  });
+}
+
 app.listen(PORT, () => {
   console.log(`🚀 GEO Auditor Server running on http://localhost:${PORT}`);
 });
